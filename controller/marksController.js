@@ -4,7 +4,9 @@ const getMarksService=marksService.getMarks;
 let  avgMarksAsyncController = async function(req,res){
     console.log(req.params.studentId)
     try {
+        console.log('We r going to call service');
         let result = await getMarksService({ student_id: req.params.studentId })
+        console.log('We got the result');
         // let result = await marksModel.find({ student_id: req.params.studentId })
         let avg=500;                                               //in result parameter we will get the resolved data
         let totalObtainedMarks=0;
@@ -13,9 +15,9 @@ let  avgMarksAsyncController = async function(req,res){
           totalObtainedMarks+=markObj.marks_obtained;
           maxMarks++;
         })
-        // console.log(totalObtainedMarks,maxMarks)
+        console.log('total and max: '+totalObtainedMarks,maxMarks)
         avg=totalObtainedMarks/maxMarks;
-        // console.log(result)
+        console.log("result")
         res.status(200).json({
           data:{
             avgMarks:avg
