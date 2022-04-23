@@ -1,6 +1,6 @@
 const marksService=require('../services/markDbService')
 const getMarksService=marksService.getMarks;
-
+//---------------------------------------------------------------------------------------------------------------------
 let  avgMarksAsyncController = async function(req,res){
     console.log(req.params.studentId)
     try {
