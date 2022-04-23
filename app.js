@@ -4,8 +4,8 @@ const registerMarksRoute= require('./routes/marksRoute');
 
 const app=express();
 
-//MIDDLEWARES
-app.use(express.json())
+//MIDDLEWARES 
+app.use(express.json())   // to parse the request
 
 // DATABASE CONNECTION
 const dbConnect=require('./startup/db')
