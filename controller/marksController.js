@@ -10,13 +10,13 @@ let  avgMarksAsyncController = async function(req,res){
         // let result = await marksModel.find({ student_id: req.params.studentId })
         let avg=500;                                               //in result parameter we will get the resolved data
         let totalObtainedMarks=0;
-        let maxMarks=0;
+        let totalSubjects=0;
         result.forEach(function (markObj,index){
           totalObtainedMarks+=markObj.marks_obtained;
-          maxMarks++;
+          totalSubjects++;
         })
-        console.log('total and max: '+totalObtainedMarks,maxMarks)
-        avg=totalObtainedMarks/maxMarks;
+        console.log('total and max: '+totalObtainedMarks,totalSubjects)
+        avg=totalObtainedMarks/totalSubjects;
         console.log("result")
         res.status(200).json({
           data:{
@@ -37,13 +37,13 @@ let avgMarksPromiseController=function(req,res){
     marksPromise.then(function(result){
       let avg=500;                                               //in result parameter we will get the resolved data
       let totalObtainedMarks=0;
-      let maxMarks=0;
+      let totalSubjects=0;
       result.forEach(function (markObj,index){
         totalObtainedMarks+=markObj.marks_obtained;
-        maxMarks++;
+        totalSubjects++;
       })
-      console.log(totalObtainedMarks,maxMarks)
-      avg=totalObtainedMarks/maxMarks;
+      console.log(totalObtainedMarks,totalSubjects)
+      avg=totalObtainedMarks/totalSubjects;
       console.log(result)
       res.status(200).json({
         data:{
