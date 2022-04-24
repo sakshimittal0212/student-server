@@ -10,7 +10,17 @@ function updateMarks(filter,dataToUpdate){
     return  marksModel.updateOne(filter,dataToUpdate) 
  }
 
+function maxMarks(filter){
+    return marksModel.find(filter)
+}
+
+function minMarks(filter){
+    return marksModel.find(filter)
+}
+
 module.exports={
     getMarks:getMarks,
-    updateMarks:updateMarks
+    updateMarks:updateMarks,
+    maxMarks:maxMarks,
+    minMarks:minMarks
 };

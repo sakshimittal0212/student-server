@@ -19,7 +19,10 @@ const dbConnect=require('./startup/db')
 dbConnect();
 
 //APIs
-registerMarksRoute(app);
+registerMarksRoute.attachApi(app);
+registerMarksRoute.getMarksApi(app);
+registerMarksRoute.maxMarksApi(app);
+registerMarksRoute.minMarksApi(app);
 insertStudentApi(app);
 getStudentApi(app);
 getStudentById(app);
