@@ -10,6 +10,5 @@ const marksSchema= new mongoose.Schema({
   })
   
   const marksModel=mongoose.model('marksDb',marksSchema);
-  //var xyz;
 
 module.exports=marksModel;
