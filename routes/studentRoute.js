@@ -5,6 +5,11 @@ const getStudentByIdController=studentController.getStudentByIdController;
 const deleteStudentController=studentController.deleteStudentController;
 const updateStudentController=studentController.updateStudentController;
 
+//todo 
+//1.create only one attachApi function and directly export it 
+//2. write all the api routes in this function donot create function for every route
+//3.you can directly write controller using dot in
+// APIs controller parameter eg. app.get('/xyz',studentController.xyz)
 function insertStudentApi(app)
 {
     app.post('/api/async/student',insertStudentController)
