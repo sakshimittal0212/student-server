@@ -4,7 +4,9 @@ const registerMarksRoute= require('./routes/marksRoute');
 const studentRoute=require('./routes/studentRoute')
 const getStudentApi=studentRoute.getStudentApi;
 const insertStudentApi=studentRoute.insertStudentApi;
-const getStudentById=studentRoute.getStudentByIdApi
+const getStudentById=studentRoute.getStudentByIdApi;
+const deleteStudentApi=studentRoute.deleteStudentApi;
+const updateStudentApi=studentRoute.updateStudentApi;
 
 const app=express();
 
@@ -20,6 +22,8 @@ registerMarksRoute(app);
 insertStudentApi(app);
 getStudentApi(app);
 getStudentById(app);
+deleteStudentApi(app);
+updateStudentApi(app);
 
 //STARTING THE SERVER
  app.listen(4000 , () =>{

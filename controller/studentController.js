@@ -1,8 +1,11 @@
+const studentModel=require('../models/studentModel')
+const mongoose= require('mongoose');
+
 const studentDbService=require('../services/studentDbService')
 const getStudents=studentDbService.getStudents;
 const getStudentById=studentDbService.getStudentById;
-const studentModel=require('../models/studentModel')
-const mongoose= require('mongoose');
+const deleteStudent=studentDbService.deleteStudent;
+const updateStudent=studentDbService.updateStudent;
 
 let insertStudentController=async function (request,response){
     const user=new  studentModel({
@@ -40,11 +43,38 @@ let getStudentByIdController= async function(req,res){
   }
 }
 
+let deleteStudentController=async function(req,res){
+  console.log(req.params.id);
+  try {
+    let result=await deleteStudent({_id: req.params.id})
+    res.status(200).json({
+      message: "deleted successfully",
+      studentData:result})
+  } catch (error) {
+    res.status(500).json({err:error})
+  }
+}
+
+let updateStudentController=async function(req,res){
+  try {
+    let result=await updateStudent({_id:req.params.id},{
+      $set:{
+        name:req.body.name,
+        roll_no:req.body.roll_no,  
+      }
+    })
+    res.status(200).json({data:result })
+  } catch (error) {
+    res.status(500).json({err:error})
+  }
+}
 
 module.exports={
     insertStudentController : insertStudentController,
     getStudentController:getStudentController,
-    getStudentByIdController:getStudentByIdController
+    getStudentByIdController:getStudentByIdController,
+    deleteStudentController:deleteStudentController,
+    updateStudentController:updateStudentController
 }
     ;
   
