@@ -7,6 +7,7 @@ const insertStudentApi=studentRoute.insertStudentApi;
 const getStudentById=studentRoute.getStudentByIdApi;
 const deleteStudentApi=studentRoute.deleteStudentApi;
 const updateStudentApi=studentRoute.updateStudentApi;
+const subjectRoute=require('./routes/subjectRoute')
 
 const app=express();
 
@@ -24,6 +25,7 @@ getStudentApi(app);
 getStudentById(app);
 deleteStudentApi(app);
 updateStudentApi(app);
+subjectRoute(app);
 
 //STARTING THE SERVER
  app.listen(4000 , () =>{
