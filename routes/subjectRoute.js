@@ -1,7 +1,7 @@
 const getSubjectController=require('../controller/subjectController');
 
-function getSubjectApi(app){
+function attachSubjectApi(app){
     app.get('/api/async/subject',getSubjectController);
 }
 
-module.exports=getSubjectApi;
+module.exports=attachSubjectApi;
