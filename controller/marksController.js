@@ -44,7 +44,7 @@ let avgMarksPromiseController=function(req,res){
       })
       console.log(totalObtainedMarks,totalSubjects)
       avg=totalObtainedMarks/totalSubjects;
-      console.log(result)
+      // console.log(result)
       res.status(200).json({
         data:{
           avgMarks:avg
