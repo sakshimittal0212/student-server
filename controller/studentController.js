@@ -1,11 +1,16 @@
 const studentModel=require('../models/studentModel')
 const mongoose= require('mongoose');
 
-const studentDbService=require('../services/studentDbService')
-const getStudents=studentDbService.getStudents;
-const getStudentById=studentDbService.getStudentById;
-const deleteStudent=studentDbService.deleteStudent;
-const updateStudent=studentDbService.updateStudent;
+const studentDbService=require('../services/studentDbService');
+const { response } = require('express');
+
+const { getStudents,getStudentById,deleteStudent,updateStudent}=studentDbService;
+// this is example of destructuring------
+// const getStudents=studentDbService.getStudents;
+// const getStudentById=studentDbService.getStudentById;
+// const deleteStudent=studentDbService.deleteStudent;
+// const updateStudent=studentDbService.updateStudent;
+const utils=require('../helpers/utils')
 
 let insertStudentController=async function (request,response){
     const user=new  studentModel({
@@ -69,12 +74,23 @@ let updateStudentController=async function(req,res){
   }
 }
 
+let signUpController=function(req,res){
+  console.log(req.body.phoneNo);
+  try {
+    let otp=utils.generateOtp(5)
+    res.status(200).json({otp:otp}) 
+    
+  } catch (error) {
+    res.status(500).json({ err:"server error"})
+  }
+}
 module.exports={
-    insertStudentController : insertStudentController,
-    getStudentController:getStudentController,
+    insertStudentController,   //when key name and values variable name is same then we can directly write variable name
+    getStudentController,      // key name =variable name and value will be variable value
     getStudentByIdController:getStudentByIdController,
     deleteStudentController:deleteStudentController,
-    updateStudentController:updateStudentController
+    updateStudentController:updateStudentController,
+    signUpController:signUpController
 }
     ;
   

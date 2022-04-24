@@ -11,6 +11,7 @@ function attachStudentApi(app)
     app.get('/api/async/student/:id',studentController.getStudentByIdController)
     app.delete('/api/async/student/:id',studentController.deleteStudentController)
     app.put('/api/async/student/:id',studentController.updateStudentController)
+    app.post('/api/student/signUp',studentController.signUpController)
 }
 
 
