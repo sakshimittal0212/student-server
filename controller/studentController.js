@@ -91,10 +91,6 @@ let updateStudentController=async function(req,res){
 //  }
 // } 
 
-
-
-
-
 let signUpController=function(req,res){
   console.log(req.body.phoneNo);
   try {
@@ -109,7 +105,6 @@ let signUpController=function(req,res){
 let generateTokenController=function(req,res){
   console.log(req.body.phoneNo);
   try {
-    // let otp=utils.generateOtp(5)
     let token=utilsFile.generateToken({phoneNo:req.body.phoneNo})
     res.status(200).json({result:token}) 
     
@@ -131,6 +126,31 @@ let decodeTokenController=function(req,res){
   }
 }
 
+let generateHashController=function(req,res){
+  console.log(req.body.password);
+  try {
+    const saltRounds = 10;
+    let hashCode=utilsFile.generateHash(req.body.password,saltRounds)
+    res.status(200).json({result:hashCode}) 
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ err:"server error"})
+  }
+}
+
+let compareHashController=function(req,res){
+  console.log(req.body.password);
+  try {
+    let hashCode=utilsFile.compareHash(req.body.password,req.body.hash)
+    res.status(200).json({result:hashCode}) 
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ err:"server error"})
+  }
+}
+
 
 module.exports={
     insertStudentController,   //when key name and values variable name is same then we can directly write variable name
@@ -140,7 +160,9 @@ module.exports={
     updateStudentController:updateStudentController,
     signUpController:signUpController,
     generateTokenController:generateTokenController,
-    decodeTokenController:decodeTokenController
+    decodeTokenController:decodeTokenController,
+    generateHashController,
+    compareHashController
 }
     ;
   

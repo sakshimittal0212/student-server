@@ -14,6 +14,8 @@ function attachStudentApi(app)
     app.post('/api/student/signUp',studentController.signUpController)
     app.post('/api/student/generateToken',studentController.generateTokenController)
     app.post('/api/student/decodeToken',studentController.decodeTokenController)
+    app.post('/api/student/hashPassword',studentController.generateHashController)
+    app.post('/api/student/compareHashPassword',studentController.compareHashController)
     
 }
 
