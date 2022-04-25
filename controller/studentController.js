@@ -1,4 +1,5 @@
 const studentModel=require('../models/studentModel')
+// const userModel=require('../models/userModel')
 const mongoose= require('mongoose');
 
 const studentDbService=require('../services/studentDbService');
@@ -10,7 +11,7 @@ const { getStudents,getStudentById,deleteStudent,updateStudent}=studentDbService
 // const getStudentById=studentDbService.getStudentById;
 // const deleteStudent=studentDbService.deleteStudent;
 // const updateStudent=studentDbService.updateStudent;
-const utils=require('../helpers/utils')
+const utilsFile=require('../helpers/utils')
 
 let insertStudentController=async function (request,response){
     const user=new  studentModel({
@@ -74,23 +75,94 @@ let updateStudentController=async function(req,res){
   }
 }
 
+// let loginController=async function (request,response){
+//   const user=new  userModel({
+//       _id:new mongoose.Types.ObjectId,
+//       name:request.body.name,
+//       email:request.body.email,
+//       phoneNo:request.body.phoneNo
+//     })
+//   try {
+//    let result= await user.save();
+//    response.status(200).json({newUser:result})  
+//  } catch (error) {
+//    console.log(error);
+//    response.status(404).json({err:error})
+//  }
+// } 
+
 let signUpController=function(req,res){
   console.log(req.body.phoneNo);
   try {
-    let otp=utils.generateOtp(5)
-    res.status(200).json({otp:otp}) 
+    let otp=utilsFile.generateOtp(5)
+    res.status(200).json({result:otp}) 
     
   } catch (error) {
     res.status(500).json({ err:"server error"})
   }
 }
+ 
+let generateTokenController=function(req,res){
+  console.log(req.body.phoneNo);
+  try {
+    let token=utilsFile.generateToken({phoneNo:req.body.phoneNo})
+    res.status(200).json({result:token}) 
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ err:"server error"})
+  }
+}
+
+let decodeTokenController=function(req,res){
+  console.log(req.body.token);
+  try {
+    let token=utilsFile.decodeToken(req.body.token)
+    res.status(200).json({result:token}) 
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ err:"server error"})
+  }
+}
+
+let generateHashController=function(req,res){
+  console.log(req.body.password);
+  try {
+    const saltRounds = 10;
+    let hashCode=utilsFile.generateHash(req.body.password,saltRounds)
+    res.status(200).json({result:hashCode}) 
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ err:"server error"})
+  }
+}
+
+let compareHashController=function(req,res){
+  console.log(req.body.password);
+  try {
+    let hashCode=utilsFile.compareHash(req.body.password,req.body.hash)
+    res.status(200).json({result:hashCode}) 
+    
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ err:"server error"})
+  }
+}
+
+
 module.exports={
     insertStudentController,   //when key name and values variable name is same then we can directly write variable name
     getStudentController,      // key name =variable name and value will be variable value
     getStudentByIdController:getStudentByIdController,
     deleteStudentController:deleteStudentController,
     updateStudentController:updateStudentController,
-    signUpController:signUpController
+    signUpController:signUpController,
+    generateTokenController:generateTokenController,
+    decodeTokenController:decodeTokenController,
+    generateHashController,
+    compareHashController
 }
     ;
   
