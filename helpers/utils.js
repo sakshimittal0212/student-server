@@ -1,7 +1,8 @@
 var jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const constants=require('./constant')
 
-let secretKey='shhhhh'
+let {saltRounds,secretKey} = constants;
 
 let generateOtp=function(num){
     var digits = '0123456789';
@@ -22,11 +23,10 @@ return token
 let decodeToken=function(token){
     var decode=jwt.decode(token)
     var decoded = jwt.verify(token, secretKey);
-console.log(decode)
+// console.log(decode)
 return decoded
 }
-
-let generateHash=function(password,saltRounds){
+let generateHash=function(password){
     const hash = bcrypt.hashSync(password,saltRounds);
     return hash
 }

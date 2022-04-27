@@ -1,7 +1,7 @@
 const mongoose= require('mongoose');
 
 const marksSchema= new mongoose.Schema({
-    _id: mongoose.Types.ObjectId,
+    // _id: mongoose.Types.ObjectId,
     subject_id:String,
     student_id:String ,
     marks_obtained:Number,

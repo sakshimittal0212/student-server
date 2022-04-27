@@ -1,8 +1,25 @@
+const { insertMarks } = require('../services/markDbService');
 const markDbService=require('../services/markDbService')
 const maxMarks=markDbService.maxMarks;
 const minMarks=markDbService.minMarks;
 const getMarks=markDbService.getMarks;
 //---------------------------------------------------------------------------------------------------------------------
+let insertMarkController=async function(req,res){
+    try {
+    let result=await markDbService.insertMarks({
+      subject_id: req.body.subject_id,
+      student_id : req.body.student_id,
+      marks_obtained:req.body.marks_obtained,
+      total_marks:req.body.total_marks
+    });
+    console.log(result)
+    res.status(200).json({data:result})
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({err:error})
+  }
+ }
+
 let  avgMarksAsyncController = async function(req,res){
     console.log(req.params.studentId)
     try {
@@ -128,6 +145,7 @@ module.exports={
     avgMarksPromiseController:avgMarksPromiseController,
     getMarksController:getMarksController,
     maxMarksController:maxMarksController,
-    minMarksController:minMarksController
+    minMarksController:minMarksController,
+    insertMarkController
 
 }

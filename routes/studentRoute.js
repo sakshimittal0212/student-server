@@ -1,4 +1,5 @@
 const studentController=require('../controller/studentController')
+const middleware=require('../middlewares/middleware')
 //todo 
 //1.create only one attachApi function and directly export it 
 //2. write all the api routes in this function donot create function for every route
@@ -7,7 +8,7 @@ const studentController=require('../controller/studentController')
 function attachStudentApi(app)
 {
     app.post('/api/async/student',studentController.insertStudentController)
-    app.get('/api/async/student',studentController.getStudentController)
+    app.get('/api/async/student',middleware.authenicate,studentController.getStudentController)
     app.get('/api/async/student/:id',studentController.getStudentByIdController)
     app.delete('/api/async/student/:id',studentController.deleteStudentController)
     app.put('/api/async/student/:id',studentController.updateStudentController)

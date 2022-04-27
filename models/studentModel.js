@@ -2,7 +2,6 @@ const mongoose= require('mongoose');
 
 //blueprint fields types
 const studentSchema = new mongoose.Schema({
-    student_id:mongoose.Schema.Types.ObjectId,
     name: String,
     roll_no: String,
     class: String
