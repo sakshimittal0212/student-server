@@ -5,7 +5,6 @@ env.config();
 console.log(process.env.PWD)
 console.log(process.env.SERVER_PORT)
 
-
 const registerMarksRoute= require('./routes/marksRoute');
 const middleware=require('./middlewares/middleware');
 
