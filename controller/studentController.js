@@ -5,23 +5,28 @@ const mongoose= require('mongoose');
 const studentDbService=require('../services/studentDbService');
 const { response } = require('express');
 
-const { getStudents,getStudentById,deleteStudent,updateStudent}=studentDbService;
+const { getStudent,createStudent,getStudents,getStudentById,deleteStudent,updateStudent}=studentDbService;
 // this is example of destructuring------
 // const getStudents=studentDbService.getStudents;
 // const getStudentById=studentDbService.getStudentById;
 // const deleteStudent=studentDbService.deleteStudent;
 // const updateStudent=studentDbService.updateStudent;
-const utilsFile=require('../helpers/utils')
+const utilsFile=require('../helpers/utils');
+const res = require('express/lib/response');
 
 let insertStudentController=async function (request,response){
-    const user=new  studentModel({
-        student_id:new mongoose.Types.ObjectId,
-        name:request.body.name,
-        roll_no:request.body.roll_no,
-        class:request.body.class
-      })
+  
     try {
-     let result= await user.save();
+     let studentExist= await getStudent({roll_no:request.body.roll_no})
+     console.log(studentExist);
+     if(studentExist){
+       return response.status(400).json({err:"roll no already exist"})
+     }
+     let result= await createStudent({
+      name:request.body.name,
+      roll_no:request.body.roll_no,
+      class:request.body.class
+    });
      response.status(200).json({newUser:result})  
    } catch (error) {
      console.log(error);
@@ -143,6 +148,7 @@ let compareHashController=function(req,res){
   console.log(req.body.password);
   try {
     let hashCode=utilsFile.compareHash(req.body.password,req.body.hash)
+    console.log(hashCode);
     res.status(200).json({result:hashCode}) 
     
   } catch (error) {

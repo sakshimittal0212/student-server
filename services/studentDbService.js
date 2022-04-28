@@ -1,13 +1,22 @@
 const studentModel=require('../models/studentModel')
 const mongoose= require('mongoose');
 
-function getStudents()
-{
-    return studentModel.find()
+// dataTOsave is an object having key values that we need to d=save in database
+ function createStudent(dataToSave){
+  const user=new  studentModel(dataToSave)
+  return  user.save();
+}
+// filter is an object eg: {name:"sakshi"}
+function getStudent(filter){
+    return studentModel.findOne(filter)
 }
 
-function getStudentById(filter){
-   return studentModel.findById(filter)
+function getStudents(){
+    return studentModel.find()
+}
+// id is a string 
+function getStudentById(id){
+   return studentModel.findById(id)
 }
 
 function deleteStudent(filter){
@@ -22,20 +31,12 @@ module.exports={
     getStudents : getStudents,
     getStudentById:getStudentById,
     deleteStudent:deleteStudent,
-    updateStudent:updateStudent
+    updateStudent:updateStudent,
+    createStudent,
+    getStudent
 };
 
 
 
 
-//Didn't use it------------------------------------------------------
-// function insertMarks(){
-//     const user=new  studentModel({
-//         student_id:new mongoose.Types.ObjectId,
-//         name:request.body.name,
-//         roll_no:request.body.roll_no,
-//         class:request.body.class
-//       })
-//      return user.save();
-//     }
 

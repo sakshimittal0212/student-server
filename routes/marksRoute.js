@@ -7,6 +7,7 @@ function attachApi(app){
  //attching APi controller and endpoints and http methods(get,put,post ) with express app as an arrugement 
 //  that we are getting from app.js file 
  // when this function is called
+ app.post('/api/async/mark',marksController.insertMarkController)
  
  app.get('/api/promise/avgMarks/:studentId',marksController.avgMarksPromiseController)
 
